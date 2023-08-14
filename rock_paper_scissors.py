@@ -1,50 +1,57 @@
 import random
 
-user_wins = 0
-computer_wins = 0
+exit = False #if exit = False, then the game keeps going on
+user_points = 0
+computer_points = 0
 
-#lists(data structures) are collections of elements, that can be accessed via index : options[0] = rock
-#list is encapsulated in [] and seperated by ',' ;this checks if user_input belongs to one of entries
-#indices start from 0 to n-1 for list of 'n' elements
+while exit == False:
+    options = ["rock", "paper", "scissors"]
+    user_input = input("Choose rock, paper, scissors or exit: ")
+    computer_input = random.choice(options)
 
-options = ["rock", "paper", "scissors"]
+    if user_input == "exit":
+        print("Goodbye!")
+        print("You won a total score of " + str(user_points) + " and computer won a score of " + str(computer_points))
+        exit = True
 
-while True:
-    user_input = input("Choose Rock/Paper/Scissors or type 'Q' to quit: ").lower()
-    #previous i/p converted to lower c for uniformity
-    if user_input == "q":
-        break #exits the loop (can be used in while or for alone)
-    
-    #you can also add the list directly instsead of using 'options' variable
-    if user_input not in options:
-        continue #it will go back directly and ask for proper input 
+    elif user_input == "rock":
+        if computer_input == "rock":
+            print("Computer chose rock.")
+            print("Tie!")
+        elif computer_input == "paper":
+            print("Computer chose paper.")
+            print("You lose!")
+            computer_points += 1
+        elif computer_input == "scissors":
+            print("Computer chose scissors.")
+            print("You win!")
+            user_points += 1
 
-    #generate a random number that represent R, P, S for the computer
-    random_number = random.randint(0, 2)
-    #rock : 0, paper : 1, scissors : 2
-    #computer_pick chooses one of the values from the index where index is a random number
-    computer_pick = options[random_number]
-    print("Computer picked", computer_pick + ".")
+    elif user_input == "paper":
+        if computer_input == "rock":
+            print("Computer chose rock.")
+            print("You win!")
+            user_points += 1
+        elif computer_input == "paper":
+            print("Computer chose paper.")
+            print("Tie!")
+        elif computer_input == "scissors":
+            print("Computer chose scissors.")
+            print("You lose!")
+            computer_points += 1
 
-    if user_input == "rock" and computer_pick == "scissors":
-        print("You win!!")
-        user_wins += 1
-        
-    elif user_input == "paper" and computer_pick == "rock":
-        print("You win!!")
-        user_wins += 1
-        
-    elif user_input == "scissors" and computer_pick == "paper":
-        print("You win!!")
-        user_wins += 1
-
-    elif user_input == computer_pick:
-        print("It's a tie!")
-
-    else:
-        print("Computer Wins!")   
-        computer_wins += 1
-
-print("You won", user_wins, "times.")
-print("The computer won", computer_wins, "times.")
-print("Goodbye!")
+    elif user_input == "scissors":
+        if computer_input == "rock":
+            print("Computer chose rock.")
+            print("You lose!")
+            computer_points += 1            
+        elif computer_input == "paper":
+            print("Computer chose paper.")
+            print("You win!")
+            user_points += 1
+        elif computer_input == "scissors":
+            print("Computer chose scissors.")
+            print("Tie!")
+            
+    elif user_input != "rock" or user_input != "paper" or user_input != "scissors":
+        print("Invalid input.")

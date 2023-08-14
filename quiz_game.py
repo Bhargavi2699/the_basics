@@ -1,48 +1,66 @@
-print("Welcome to my computer quiz!!!")
+#a dictionary that stores questions and answers
+#have a variable that tracks the score of the player
+#loop through the dictionary using the key-value pair
+#display each question to the user and allow them to answer
+#tell them if they're right or wrong
+#show the result when the quiz is complete
+#value for this case is gonna be another dictionary here
 
-playing = input("Do you want to play the game? ")
-#print(playing)
+quiz = {
+    "question1" : {
+        "question" : "What is the capital of France?",
+        "answer" : "Paris"
+    },
 
-#lower()(inbuilt func btw) is used here to convert all of our answers to a particular consistent way
-# #hence both 'playing' and 'answer' has .lower() in it.
-if playing.lower() != "yes": #True or False, checking Boolean
-    quit() #terminates your program - inbuilt function
+    "question2" : {
+        "question" : "What is the capital of Germany?",
+        "answer" : "Berlin"
+    },
 
-print("Awesome! Let's play!:P") #if yes, print this stmt
+    "question3" : {
+        "question" : "What is the capital of Italy?",
+        "answer" : "Rome"
+    },
 
-score = 0 
+    "question4" : {
+        "question" : "What is the capital of Spain?",
+        "answer" : "Madrid"
+    },
 
-answer = input("What does CPU stand for? ")
-if answer.lower() == "central processing unit":
-    print('Correct!Cool!!') #can use ' ' or " " interchageably, just make sure you remember to be consistent
-    score += 1
-else:
-    print('Incorrect!Boo!!')
+    "question5" : {
+        "question" : "What is the capital of Portugal?",
+        "answer" : "Lisbon"
+    },
 
-#can use the variable repeatedly, as it's usage is already up after 'if' stmt
-answer = input("What does GPU stand for? ")
-if answer.lower() == "graphics processing unit":
-    print('Correct!Cool!!') 
-    score += 1
-else:
-    print('Incorrect!Boo!!')
+    "question6" : {
+        "question" : "What is the capital of Switzerland?",
+        "answer" : "Bern"
+    },
 
-answer = input("What does RAM stand for? ")
-if answer.lower() == "random access memory":
-    print('Correct!Cool!!') 
-    score += 1
-else:
-    print('Incorrect!Boo!!')
+    "question7" : {
+        "question" : "What is the capital of Austria?",
+        "answer" : "Vienna"
+    }
+}
 
-#can do .lower() in the i/p as well, but not in variable dec, as syntax error occurs.
-answer = input("What does PSU stand for? ").lower()
-if answer == "power supply":
-    print('Correct!Cool!!')
-    score += 1
-else:
-    print('Incorrect!Boo!!')
+score = 0
 
-#str() type conversion/casting is done because concatenation of diff datatypes is not possible
-print("Your final score is " + str(score))
-#getting percentage - BODMAS/PEMDAS lol
-print("Your final percentage is " + str(score / 4 * 100) +"%")
+#looping through a dictionary
+for key, value in quiz.items():
+    print(value['question'])
+    answer = input("Answer: ")
+
+    if answer.lower() == value['answer'].lower():
+        print("Correct!")
+        score += 1
+        print("Your score is: " + str(score))
+        print()
+
+    else:
+        print("Wrong!")
+        print("The answer is: " + value['answer'])
+        print("You score is: " + str(score))
+        print()
+
+print("You got " + str(score) + " out of 7 questions correctly.")
+print("You got " + str(int(score / 7 * 100)) + "%")
