@@ -1,33 +1,68 @@
-#function that takes list and target parameter
-#multiple variables used: start, end, middle, steps
-#recursion or while loop
-#increase the steps each time a split is done.
-#conditions to target position
+import random
+import time
 
-def binary_search(list_elements, element):
-    middle = 0
-    start = 0
-    end = len(list_elements)
-    steps = 0
+#implementing binary search algorithm, also to prove binary is faster than naive(linear) search algorithm
+#linear/naive search : scans the entire list and finds the element, if present, return element, else return -1
 
-    while(start <= end):
-        print("Step ", steps, ":", str(list_elements[start:end + 1]))
-
-        steps += 1
-        middle = (start + end) // 2
-
-        if element == list_elements[middle]:
-            return middle
-
-        if element < list_elements[middle]:
-            end = middle - 1
-            #can use recursion and call binary_search() here and maybe see if you can get rid of the while loop
+#start by defining naive search
+def naive_search(l, target):
+    #example l = [1, 3, 10, 34]
+    for i in range(len(l)):
+        if l[i] == target:
+            return target
         else:
-            start = middle + 1
+            return -1
+        
+#binary search uses divide and conquer, using the fact that our list is sorted
+def binary_search(l, target, low = None, high = None):
+    #example l = [1, 3, 5, 10, 34]
+    if low is None:
+        low = 0
 
-    return -1
+    if high is None:
+        high = len(l) - 1
 
-my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-target = 4
+    if high < low:
+        return -1
 
-binary_search(my_list, target)
+    midpoint = (low + high) // 2 #rounds off the final value into an integer
+
+    if l[midpoint] == target: 
+        return target
+    elif target < l[midpoint]:
+        return binary_search(l, target, low, midpoint - 1) #using recursion by calling the function to itself
+    else:
+        #target > l[midpoint]
+        return binary_search(l, target, midpoint + 1, high) #using recursion by calling the function to itself
+    
+if __name__ == "__main__":
+    # l = [1, 3, 5, 10, 25]
+    # target = 10
+    # print(naive_search(l, target))
+    # print(binary_search(l, target))
+
+    length = 10000
+    #build a sorted list of length 10000
+    sorted_list = set()
+    while len(sorted_list) < length: 
+        sorted_list.add(random.randint(-3 * length, 3 * length)) #range is -30000 to 30000
+    sorted_list = sorted(list(sorted_list)) #making it completely sorted now
+
+    #so right now we're making everything the target in the list
+    start = time.time() #checking the time stamp ....and stuff
+    for target in sorted_list:
+        naive_search(sorted_list, target) #naive_search is run 10000 times here
+    end = time.time()
+    print("Naive search time: ", (end - start)/length, "seconds")
+
+    start = time.time() #checking the time stamp ....and stuff
+    for target in sorted_list:
+        binary_search(sorted_list, target) #naive_search is run 10000 times here
+    end = time.time()
+    print("Binary search time: ", (end - start)/length, "seconds")
+
+
+
+        
+
+
