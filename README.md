@@ -1,14 +1,12 @@
-# Markov Chain Composer
-Using Markov Chain to represent relationships between words in song lyrics and then generating new lyrics.. *ahem* interpretive poetry... from the graph
+# PyPhotoshop
+Python implementation of image filters
 
-To run: `python3 compose.py`
+Use Python to adjust brightness and contrast, add blur, and detect edges! Follow along tutorial: https://youtu.be/4ifdUQmZqhM
 
-You'll have to slightly change some of the code in order to adjust length of composition/which file is the vocabulary for the composition.
+In order to download this code, either click the green button at the top right and download as ZIP, or use `git clone https://github.com/kying18/pyphotoshop.git`. You will need to `pip install -r requirements.txt` (or use `pip3` if you are getting a module not found error).
 
-YouTube Kylie Ying: https://www.youtube.com/ycubed 
-Twitch KylieYing: https://www.twitch.tv/kylieying 
-Twitter @kylieyying: https://twitter.com/kylieyying 
-Instagram @kylieyying: https://www.instagram.com/kylieyying/ 
-Website: https://www.kylieying.com
-Github: https://www.github.com/kying18 
-Programmer Beast Mode Spotify playlist: https://open.spotify.com/playlist/4Akns5EUb3gzmlXIdsJkPs?si=qGc4ubKRRYmPHAJAIrCxVQ 
+In the folder, you will find these files:
+- image.py: contains the `Image` class that will read and write the images using the PNG `Writer` and `Reader`
+- png.py: pure Python PNG `Reader` and `Writer` classes from Johann C. Rocholl
+- transform.py: implemented image filter functions
+- transform_empty.py: empty template for image filter functions
