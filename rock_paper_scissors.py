@@ -1,57 +1,27 @@
+#rock > scissors; scissors > paper; paper > rock
+
 import random
 
-exit = False #if exit = False, then the game keeps going on
-user_points = 0
-computer_points = 0
+def play():
+    user = input("Choose between rock 'r', paper 'p' and scissors 's': ").lower()
+    computer = random.choice(['r', 'p', 's'])
 
-while exit == False:
-    options = ["rock", "paper", "scissors"]
-    user_input = input("Choose rock, paper, scissors or exit: ")
-    computer_input = random.choice(options)
+    if user == computer:
+        return 'It\'s a Tie!!'
+    
+    #here we check the below function, note: we are not calling it just checking the conditions
+    #hence indentation is importatnt
+    if is_win(user, computer):
+        return "You win!!"
+    
+    #using only a return statement instead of an else statement, since the above 2 are already passed.
+    #or you can do, if is_win(computer, user): where parameters are being flipped, and return "you lose"
+    return "You lose."
+    
+def is_win(player, opponent):
+    #return true if player wins
+    if (player == 'r' and opponent == 's') or (player == 's' and opponent == 'p') \
+        or (player == 'p' and opponent == 'r'):
+        return True
 
-    if user_input == "exit":
-        print("Goodbye!")
-        print("You won a total score of " + str(user_points) + " and computer won a score of " + str(computer_points))
-        exit = True
-
-    elif user_input == "rock":
-        if computer_input == "rock":
-            print("Computer chose rock.")
-            print("Tie!")
-        elif computer_input == "paper":
-            print("Computer chose paper.")
-            print("You lose!")
-            computer_points += 1
-        elif computer_input == "scissors":
-            print("Computer chose scissors.")
-            print("You win!")
-            user_points += 1
-
-    elif user_input == "paper":
-        if computer_input == "rock":
-            print("Computer chose rock.")
-            print("You win!")
-            user_points += 1
-        elif computer_input == "paper":
-            print("Computer chose paper.")
-            print("Tie!")
-        elif computer_input == "scissors":
-            print("Computer chose scissors.")
-            print("You lose!")
-            computer_points += 1
-
-    elif user_input == "scissors":
-        if computer_input == "rock":
-            print("Computer chose rock.")
-            print("You lose!")
-            computer_points += 1            
-        elif computer_input == "paper":
-            print("Computer chose paper.")
-            print("You win!")
-            user_points += 1
-        elif computer_input == "scissors":
-            print("Computer chose scissors.")
-            print("Tie!")
-            
-    elif user_input != "rock" or user_input != "paper" or user_input != "scissors":
-        print("Invalid input.")
+print(play())  #can perfrm function calls like this as well
